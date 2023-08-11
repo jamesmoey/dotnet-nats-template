@@ -2,13 +2,14 @@ import { File } from '@asyncapi/generator-react-sdk';
 
 export default function asyncapiNatsClientTests({ params }) {
   const projectName = params.projectName;
+  const namespace = params.projectName ? params.projectName : 'Asyncapi.Nats.Client';
   return <File name={`${projectName}Tests.csproj`}>
     {`
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Asyncapi.Nats.Client.Test</RootNamespace>
+    <RootNamespace>${namespace}.Test</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

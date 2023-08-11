@@ -51,10 +51,11 @@ function getChannelWrappers(channels) {
  * @param {RenderArgument} param0 
  * @returns 
  */
-export default function clientFile({ asyncapi }) {
+export default function clientFile({ params, asyncapi }) {
   const channelIterator = Object.entries(asyncapi.channels());
   const delegates = getDelegates(channelIterator);
   const channelWrappers = getChannelWrappers(channelIterator);
+  const namespace = params.projectName ? params.projectName : 'Asyncapi.Nats.Client';
 
   return <File name={'Client.cs'}>
     {
@@ -63,11 +64,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Asyncapi.Nats.Client.Channels;
-using Asyncapi.Nats.Client.Models;
+using ${namespace}.Channels;
+using ${namespace}.Models;
 using NATS.Client;
 using NATS.Client.JetStream;
-namespace Asyncapi.Nats.Client
+namespace ${namespace}
 {
 
   ${delegates.join('\n')}

@@ -28,13 +28,16 @@ export default function asyncapiNatsClient({ params }) {
       serializationLibrary = '<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />';
     }
   }
+  const namespace = params.projectName ? params.projectName : 'Asyncapi.Nats.Client';
   return <File name={`${projectName}.csproj`}>
     {`
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     ${targetFramework}
-    <RootNamespace>Asyncapi.Nats.Client</RootNamespace>
+    <RootNamespace>${namespace}</RootNamespace>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     ${version}
     ${repositoryUrl}
     ${packageVersion}

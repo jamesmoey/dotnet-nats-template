@@ -30,16 +30,17 @@ export default function clientFile({ channelName, channel, params }) {
 ${publish(channelName, channelParameterEntries, channel.subscribe().message(0))}
 ${jetStreamPublish(channelName, channelParameterEntries, channel.subscribe().message(0))}`;
   }
+  const namespace = params.projectName ? params.projectName : 'Asyncapi.Nats.Client';
   return <File name={`${pascalCase(channelName)}.cs`}>
     {
       `using NATS.Client;
 using System;
 using System.Text;
 ${serializationLibrary}
-using Asyncapi.Nats.Client.Models;
+using ${namespace}.Models;
 using NATS.Client.JetStream;
 
-namespace Asyncapi.Nats.Client.Channels
+namespace ${namespace}.Channels
 {
   class ${pascalCase(channelName)}
   {

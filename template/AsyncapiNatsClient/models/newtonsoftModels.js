@@ -23,7 +23,7 @@ export default async function modelRenderer({ params, asyncapi }) {
     ],
   });
   const generatedModels = await generator.generateCompleteModels(asyncapi, {
-    namespace: 'Asyncapi.Nats.Client.Models',
+    namespace: params.projectName ? `${params.projectName}.Models` : 'Asyncapi.Nats.Client.Models',
   });
   const files = [];
   for (const generatedModel of generatedModels) {

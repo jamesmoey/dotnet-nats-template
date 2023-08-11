@@ -18,17 +18,18 @@ export default async function modelTestRenderer({ asyncapi, params }) {
   const generator = new CSharpGenerator();
   const generatedModels = await generator.generate(asyncapi);
   const files = [];
+  const namespace = params.projectName ? params.projectName : 'Asyncapi.Nats.Client';
 
   for (const generatedModel of generatedModels) {
     const className = generatedModel.modelName;
     const modelFileName = `${className}Test.cs`;
     const fileContent = `
-using Asyncapi.Nats.Client.Models;
+using ${namespace}.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Asyncapi.Nats.Client.Tests
+namespace ${namespace}.Tests
 {
     public class ${className}Test
     {
